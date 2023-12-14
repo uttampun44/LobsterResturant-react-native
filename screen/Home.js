@@ -1,12 +1,20 @@
-import {View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import {Alert, View, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 
 export default function(){
+
+      const navigation = useNavigation();
+
+   const loginPage = () =>{
+      navigation.navigate('Login');
+    }
+
      return(
              <View style={homeStyle.container}>
                   <Image source={require('../assets/images/ResturantHomeLogo.png')} style={{ width: 330, height: 248, aspectRatio: 16 / 9, objectFit: 'contain'}} resizeMode="cover" />
                   <Text style={homeStyle.text}>Enjoy the best restuarants or get what you need from neadby stores, delivered</Text>
-                  <TouchableOpacity style={homeStyle.button}>
+                  <TouchableOpacity style={homeStyle.button} onPress={loginPage}>
                     <Text style={homeStyle.buttonText}>Get Started</Text>
                  </TouchableOpacity>
              </View>
