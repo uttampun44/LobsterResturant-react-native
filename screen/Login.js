@@ -21,21 +21,19 @@ export default function App() {
   // login button function
   const login = () => {
 
-    if (inputVal.email.includes('@') === '') {
-
-     setVal(inputVal)
+    if (inputVal.email === '') {
+      setVal({ ...inputVal, message: "Please fill the email or phone number" });
     } else if (inputVal.password === '') {
-
-      setVal(inputVal)
+      setVal({ ...inputVal, message: "Please fill the password" });
     } else {
-
+      setVal({ ...inputVal, message: '' }); // Clear error message on successful login
       alert('Valid login credentials. Logging in...');
     }
   };
 
   // onchange input field
   const loginInput = (name) => (text) => {
-    setVal({ ...inputVal, [name]: text });
+    setVal({ ...inputVal, [name]: text, message: "" });
   };
 
   // forgot password
@@ -65,11 +63,11 @@ export default function App() {
             onChangeText={loginInput('email')}
           />
 
-          {inputVal.email &&  <Text style={loginStyle.errorText}>Please fill the email or phone number</Text>}
+           <Text style={loginStyle.errorText}>{inputVal.message ? "Please fill the email or phone number" : ""}</Text>
 
           <TextInput placeholder='Enter Password' style={loginStyle.inputField} value={inputVal.password} secureTextEntry={true} onChangeText={loginInput('password')} />
 
-          {inputVal.password && <Text style={loginStyle.errorText}>Please fill the password</Text>}
+          <Text style={loginStyle.errorText}>{inputVal.message ? "Please fill the password": ""}</Text>
           <Text style={loginStyle.forgotPassword} onPress={password}>
             Forgot Password ?
           </Text>
@@ -128,7 +126,8 @@ const loginStyle = StyleSheet.create({
   signupText: {
     flexDirection: 'row',
     paddingTop: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 16
   },
   signupTextText: {
     color: '#8C9099',
